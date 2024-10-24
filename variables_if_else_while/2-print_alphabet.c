@@ -7,7 +7,7 @@ int main() {
         putchar(letter);
         letter++;
     }
-    putchar('\n'); // Print a new line
+    putchar('\n');
 
     return 0;
 }
