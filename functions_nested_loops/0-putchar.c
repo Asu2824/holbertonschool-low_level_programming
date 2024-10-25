@@ -1,22 +1,21 @@
-#include <stdio.h>
-#include "main.h"
-/**
- * main - entry point
- *
- * Return: if
- *
- * return: Always 0 (succes)
- */
-int main(void)
-{
-	char word[] = "_putchar";
-	int i = 0;
+#include <unistd.h>
 
-	for (i = 0; i < 8; i++)
-	{
-		_putchar(word[i]);
-	}
-
-	_putchar('\n');
-	return (0);
+int _putchar(char c) {
+    return write(1, &c, 1);
 }
+
+int main(void) 
+{
+	 _putchar('_');
+	 _putchar('p');
+	 _putchar('u');
+	 _putchar('t');
+	 _putchar('c');	
+	 _putchar('h');
+	 _putchar('a');
+	 _putchar('r');
+	 _putchar('\n');
+	
+	 return 0;
+}
+
