@@ -2,8 +2,10 @@
 
 /**
 * times_table  - check the code
+*
 * Return: time table.
 */
+
 void times_table(void)
 {
 	int i, j;
