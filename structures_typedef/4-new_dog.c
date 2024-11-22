@@ -1,47 +1,48 @@
 #include "dog.h"
-#include <stdlib.h>
 
 /**
- * new_dog - creates a new dog structure
- * @name: Dog's name
- * @age: Dog's age
- * @owner: Dog's owner
- * Return: returns a pointer to newly created dog structure
+ * new_dog - A function that creates a new dog
+ * @name: the name of our Puppy
+ * @age: Never ask dog her/his name
+ * @owner: Puppy's dad
+ *
+ * Return: Null if the function fails
  */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	char *cpyname, *cpyowner;
-	int len_name = 0, len_owner = 0, i;
+	dog_t *neww;
+	int i;
 
-	if (name == NULL || owner == NULL)
+	neww = malloc(sizeof(dog_t));
+	if (!neww)
+	{
+		free(neww);
 		return (NULL);
+	}
 
-	while (name[len_name])
-		len_name++;
-	while (owner[len_owner])
-		len_owner++;
+	(*neww).name = malloc(sizeof(name) + 1);
+	(*neww).owner = malloc(sizeof(owner) + 1);
 
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
+	if (!(*neww).name || !(*neww).owner)
+	{
+		free(neww->name);
+		free(neww->owner);
+		free(neww);
 		return (NULL);
+	}
+	for (i = 0; i < name[i]; i++)
+	{
+		neww->name[i] = name[i];
+	}
+	neww->name[i] = '\0';
 
-	cpyname = malloc(len_name + 1);
-	if (cpyname == NULL)
-		return (NULL);
-	for (i = 0; name[i]; i++)
-		cpyname[i] = name[i];
-	cpyname[i] = '\0';
+	for (i = 0; i < owner[i]; i++)
+	{
+		(*neww).owner[i] = owner[i];
+	}
+	neww->owner[i] = '\0';
+	neww->age = age;
 
-	cpyowner = malloc(len_owner + 1);
-	if (cpyowner == NULL)
-		return (NULL);
-	for (i = 0; owner[i]; i++)
-		cpyowner[i] = owner[i];
-	cpyowner[i] = '\0';
-
-	new_dog->name = cpyname;
-	new_dog->age = age;
-	new_dog->owner = cpyowner;
-	return (new_dog);
+	return (neww);
 }
