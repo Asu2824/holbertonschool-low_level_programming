@@ -1,58 +1,50 @@
 #include "dog.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
- * new_dog - creates a new dog structure
- * @name: Dog's name
- * @age: Dog's age
- * @owner: Dog's owner
- * Return: returns a pointer to newly created dog structure
- */
+  * new_dog - init
+  * @name: name
+  * @age: age
+  * @owner: owner
+  * Return: new_dog
+  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-    dog_t *new_dog;
-    char *cpyname, *cpyowner;
-    int len_name = 0, len_owner = 0, i;
+	dog_t *dog;
+	int i, sizen, sizeo;
 
-    if (name == NULL || owner == NULL)
-        return (NULL);
-
-    while (name[len_name])
-        len_name++;
-    while (owner[len_owner])
-        len_owner++;
-
-    new_dog = malloc(sizeof(dog_t));
-    if (new_dog == NULL)
-        return (NULL);
-
-    cpyname = malloc(len_name + 1);
-    if (cpyname == NULL)
-    {
-        free(new_dog);
-        return (NULL);
-    }
-
-    for (i = 0; name[i]; i++)
-        cpyname[i] = name[i];
-    cpyname[i] = '\0';
-
-    cpyowner = malloc(len_owner + 1);
-    if (cpyowner == NULL)
-    {
-        free(cpyname);
-        free(new_dog);
-        return (NULL);
-    }
-
-    for (i = 0; owner[i]; i++)
-        cpyowner[i] = owner[i];
-    cpyowner[i] = '\0';
-
-    new_dog->name = cpyname;
-    new_dog->age = age;
-    new_dog->owner = cpyowner;
-
-    return (new_dog);
+	if (name == NULL)
+		sizen = 0;
+	else
+		sizen = sizeof(name);
+	if (owner == NULL)
+		sizeo = 0;
+	else
+		sizeo = sizeof(owner);
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
+	{
+		free(dog);
+		return (NULL);
+	}
+	dog->name = malloc(sizeof(char) * sizen + 1);
+	dog->owner = malloc(sizeof(char) * sizeo + 1);
+	if (dog->name == NULL || dog->owner == NULL)
+	{
+		free(dog->name);
+		free(dog->owner);
+		free(dog);
+		return (NULL);
+	}
+	for (i = 0; i < sizen + sizeo; i++)
+	{
+		if (i < sizen)
+			dog->name[i] = name[i];
+		else
+			dog->owner[i - sizen] = owner[i - sizen];
+	}
+	dog->name[sizen] = '\0';
+	dog->owner[sizeo] = '\0';
+	dog->age = age;
+	return (dog);
 }
-
