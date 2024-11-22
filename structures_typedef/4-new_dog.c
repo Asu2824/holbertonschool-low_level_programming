@@ -40,17 +40,15 @@ dog_t *new_dog(char *name, float age, char *owner)
     cpyowner = malloc(len_owner + 1);
     if (cpyowner == NULL)
     {
-        free(cpyname);   // Free previously allocated memory
-        free(new_dog);   // Free the dog structure itself
+        free(cpyname);
+        free(new_dog);
         return (NULL);
     }
 
-    // Copy the owner string into allocated memory
     for (i = 0; owner[i]; i++)
         cpyowner[i] = owner[i];
-    cpyowner[i] = '\0'; // Null-terminate the copied string
+    cpyowner[i] = '\0';
 
-    // Assign the values to the dog structure
     new_dog->name = cpyname;
     new_dog->age = age;
     new_dog->owner = cpyowner;
